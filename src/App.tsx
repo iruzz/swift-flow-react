@@ -14,6 +14,7 @@ import SiswaProfile from "./pages/siswa/Profile";
 import PerusahaanProfile from "./pages/perusahaan/Profile";
 import AdminLowongan from "./pages/admin/AdminLowonganMagang"
 import AdminDashboard from "./pages/admin/Dashboard";
+import AdminLamaran from "./pages/admin/AdminLamaranMagang";
 import PerusahaanDashboard from "./pages/perusahaan/Dashboard";
 import GuruDashboard from "./pages/guru/Dashboard";
 import SiswaProfiles from "./pages/admin/SiswaProfiles";
@@ -89,6 +90,15 @@ function App() {
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
                 <AdminLowongan />
+              </ProtectedRoute>
+            }
+          />
+
+             <Route
+            path="/admin/lamaran"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminLamaran />
               </ProtectedRoute>
             }
           />
