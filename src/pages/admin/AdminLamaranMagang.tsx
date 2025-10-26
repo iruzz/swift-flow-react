@@ -402,6 +402,8 @@ const AdminLamaranMagang = () => {
                               >
                                 <Eye className="w-4 h-4" />
                               </button>
+                              
+                              {/* Tombol untuk status Pending */}
                               {item.status === 'pending' && (
                                 <>
                                   <button
@@ -414,6 +416,52 @@ const AdminLamaranMagang = () => {
                                   >
                                     <Clock className="w-4 h-4" />
                                   </button>
+                                  <button
+                                    onClick={() => terimaLamaran(item.id)}
+                                    className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                    title="Terima Langsung"
+                                  >
+                                    <Check className="w-4 h-4" />
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedLamaran(item);
+                                      setShowRejectModal(true);
+                                    }}
+                                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                    title="Tolak"
+                                  >
+                                    <X className="w-4 h-4" />
+                                  </button>
+                                </>
+                              )}
+
+                              {/* Tombol untuk status Interview */}
+                              {item.status === 'interview' && (
+                                <>
+                                  <button
+                                    onClick={() => terimaLamaran(item.id)}
+                                    className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                    title="Lolos Interview - Terima"
+                                  >
+                                    <Check className="w-4 h-4" />
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setSelectedLamaran(item);
+                                      setShowRejectModal(true);
+                                    }}
+                                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                    title="Tidak Lolos Interview"
+                                  >
+                                    <X className="w-4 h-4" />
+                                  </button>
+                                </>
+                              )}
+
+                              {/* Tombol untuk status Proses */}
+                              {item.status === 'proses' && (
+                                <>
                                   <button
                                     onClick={() => terimaLamaran(item.id)}
                                     className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
@@ -433,6 +481,7 @@ const AdminLamaranMagang = () => {
                                   </button>
                                 </>
                               )}
+                              
                               <button
                                 onClick={() => deleteLamaran(item.id)}
                                 className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
@@ -625,6 +674,7 @@ const AdminLamaranMagang = () => {
 
               {/* Actions */}
               <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
+                {/* Actions untuk Pending */}
                 {selectedLamaran.status === 'pending' && (
                   <>
                     <button
@@ -637,6 +687,52 @@ const AdminLamaranMagang = () => {
                       <Clock className="w-4 h-4" />
                       Set Interview
                     </button>
+                    <button
+                      onClick={() => terimaLamaran(selectedLamaran.id)}
+                      className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <Check className="w-4 h-4" />
+                      Terima Langsung
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowModal(false);
+                        setShowRejectModal(true);
+                      }}
+                      className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <X className="w-4 h-4" />
+                      Tolak
+                    </button>
+                  </>
+                )}
+
+                {/* Actions untuk Interview */}
+                {selectedLamaran.status === 'interview' && (
+                  <>
+                    <button
+                      onClick={() => terimaLamaran(selectedLamaran.id)}
+                      className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <Check className="w-4 h-4" />
+                      Lolos Interview - Terima
+                    </button>
+                    <button
+                      onClick={() => {
+                        setShowModal(false);
+                        setShowRejectModal(true);
+                      }}
+                      className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
+                    >
+                      <X className="w-4 h-4" />
+                      Tidak Lolos Interview
+                    </button>
+                  </>
+                )}
+
+                {/* Actions untuk Proses */}
+                {selectedLamaran.status === 'proses' && (
+                  <>
                     <button
                       onClick={() => terimaLamaran(selectedLamaran.id)}
                       className="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
@@ -656,13 +752,17 @@ const AdminLamaranMagang = () => {
                     </button>
                   </>
                 )}
-                <button
-                  onClick={() => deleteLamaran(selectedLamaran.id)}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center justify-center gap-2"
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Hapus
-                </button>
+
+                {/* Tombol Hapus selalu ada */}
+                {(selectedLamaran.status === 'pending' || selectedLamaran.status === 'interview' || selectedLamaran.status === 'proses') && (
+                  <button
+                    onClick={() => deleteLamaran(selectedLamaran.id)}
+                    className="px-4 py-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    Hapus
+                  </button>
+                )}
               </div>
             </div>
           </div>
