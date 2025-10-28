@@ -31,7 +31,7 @@ const Sidebar = ({ role, onToggle }: SidebarProps) => {
     { name: "Lowongan Magang", path: "/admin/lowongan", icon: <Briefcase size={20} /> },
     { name: "Lamaran", path: "/admin/lamaran", icon: <FileText size={20} /> },
     { name: "Penempatan", path: "/admin/penempatan", icon: <ClipboardList size={20} /> },
-    { name: "Laporan", path: "/admin/laporan", icon: <BarChart3 size={20} /> },
+    { name: "Penilaian Magang", path: "/admin/penilaian", icon: <BarChart3 size={20} /> },
   ];
 
   const siswaMenus = [
